@@ -1,16 +1,12 @@
 //<link rel=stylesheet href=main.css />
 var hd = document.getElementsByTagName("head")[0];
 var ln = document.createElement('link');
-ln.href = 'main.css';
+ln.href = host + 'main.css';
 ln.rel='stylesheet';
 hd.appendChild(ln);
 hd = document.getElementsByTagName("body")[0];
-/*
-        <iframe src=main.html id=er>
-        </iframe>
-*/
 ln = document.createElement('iframe');
-ln.src = 'main.html';
+ln.src = host + 'main.html';
 hd.appendChild(ln);
 delete hd;
 var dirName;
