@@ -1,14 +1,19 @@
-function getImg(i){
+(function(){
+
+this.getImg = function(i){
     return `<div class="col-sm-4 wowload fadeInUp"><a href=`
     +i+` class="gallery-image" data-gallery><img src=`
     +i+` class="img-responsive"></a></div>`;
 }
 
-function shuffle(array) {
+this.shuffle = function(array) {
   let curId = array.length;
+  // There remain elements to shuffle
   while (0 !== curId) {
+    // Pick a remaining element
     let randId = Math.floor(Math.random() * curId);
     curId -= 1;
+    // Swap it with the current element.
     let tmp = array[curId];
     array[curId] = array[randId];
     array[randId] = tmp;
@@ -16,30 +21,28 @@ function shuffle(array) {
   return array;
 }
 
-gl_list = [];
-var t = GALLERY_SIZE;
-while (t > 0){
-    gl_list.push(t);
-    t--;
-}
-
-function gl_add(){
-    shuffle(gl_list);
-    t = $("#gl-body");
-    for (var i of gl_list){
-        t.append(getImg(imgRef(""+i+".png")));
+this.gl1 = function (){
+    list = [];
+    var i = 0;
+    while (i < 13){
+        i++;
+        list.push(i);
     }
-}
+    return function(){
+        shuffle(list);
+        var t = $("#wd-gallery");
+        var g = '';
+        for (i of list){
+            g+= getImg(i + '.png');
+        }
+        t.html(g);
+    }
+}();
 
-defBody("gallery", `<div class="container"><h1 class="title" id="gl-title">
-</h1><div class="row gallery" id="gl-body">
-</div></div>
-<script>
-gl_add();
-</script>
-`, function(){
+var t = gettxt('gallery.body.html'); 
+
+defBody("gallery", t, function(){
 s = getLangData('gallery');
 $("#gl-title").html(s[0]);
 });
-
-
+})()

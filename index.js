@@ -1,100 +1,7 @@
-$('head').append(`
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <style>
-    
-.details,
-.show,
-.hide:target {
-  display: none;
-}
-.hide:target + .show,
-.hide:target ~ .details {
-  display: block;
-}
-    
-.star-widget-container{
-  position: relative;
-  width: 220px;
-  background: inherit;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-}
 
+(function(){
 
-.star-widget label{
-  font-size: 16px;
-  color: #444;
-  float: right;
-  padding: 10px;
-}
-
-
-.check label{
-  color: #fd4;
-}
-
-
-.all_check label{
-  color: #fe7;
-  text-shadow: 0 0 20px #952;
-}
-
-        .star_rating{
-            user-select: none;
-            color: white;
-            background-color: white;
-            padding: 1.4rem 2.5rem;
-            margin: 2rem;
-            border-radius: .4rem;
-			animation: slide-up 1s ease;
-        }
-
-        @keyframes slide-up{
-            0%{
-                opacity: 0;
-                transform: scale(.5);
-            }
-
-            100%{
-                opacity: 1;
-                transform: scale(1);
-            }
-        }
-        
-
-        .rating_heading{
-            color: white;
-            animation: scale-up 1s ease;
-        }
-
-        @keyframes scale-up{
-            0%{
-                opacity: 0;
-                transform: translateY(50px);
-            }
-
-            100%{
-                opacity: 1;
-                transform: translateY(0px);
-            }
-        }
-
-        .star{
-            font-size: 3rem;
-            color: #ff9800;
-            background-color: unset;
-            border: none;
-            outline: none;
-        }
-
-        .star:hover{
-            cursor: pointer;
-        } 
-    </style>
-`
-);
+$('head').append(gettxt("index.head.html"));
 
 var getCSSRules = (el, css = document.styleSheets) => 
     [].concat(...[...css].map(s => [...s.cssRules||[]])) /* 1 */
@@ -104,16 +11,12 @@ var getCSSRules = (el, css = document.styleSheets) =>
 
 
 
-const exp1 = {
+this.exp1 = {
     uid: 0,
     uidr: 0,
     bodyget: function(){
         var bd = '';
-        var ar = Object.values($.get({
-            url: 'feedback.php',
-            dataType: 'json',
-            async: false
-        }).responseJSON);
+        var ar = Object.values(getjson( 'feedback.php'));
 
         for (var k of ar){
             bd += getFdb(k[0], k[1], k[2], k[3]);
@@ -156,7 +59,7 @@ const exp1 = {
     }
 };
 
-function getStar(){
+this.getStar = function(){
         const allstar = document.querySelectorAll(".star");
 
         allstar.forEach((star, i) => {
@@ -175,7 +78,7 @@ function getStar(){
         });
 }
 
-function setStar(i){ 
+this.setStar = function(i){ 
         const allstar = document.querySelectorAll(".star");
         allstar.forEach((star, d) => {
             if( d < i )
@@ -187,7 +90,7 @@ function setStar(i){
         });
 }
 
-function index(){
+this.index = function(){
     getStar();
     setStar(exp1.level);
     exp1.bodyget();
@@ -195,7 +98,7 @@ function index(){
     $(exp1.callback).css("display", "none");
 }
 
-function getRate(rate){
+this.getRate = function(rate){
     str = `<div class="star-widget-container">
       <div class="star-widget">`
       
@@ -222,24 +125,14 @@ function getRate(rate){
     return str;
 }
 
-function getFdb(name, rate, text, dt){
-    return  `
-    <div class="wowload zoomIn">
-    <p>
-    <br/>
-    </p>
-    <div style="float: right;" class=body1>`+dt+`&emsp;</div>
-    <k class="body3">`+name+`</k>
-    
-    ` + getRate(rate) + `
-    <k class="body2">
-    `+text+`
-    </k>
-    </div>
-    `;
+this.getFdb = function(name, rate, text, dt){
+    return  (
+`<div class="wowload zoomIn"><p><br/></p><div style=float:right; class=body1>`+
+    dt+`&emsp;</div><k class=body3>`+name+`</k>` + getRate(rate) + 
+    `<textarea class=body2 readonly>`+text+`</textarea></div>`);
 }
 
-function fd_sbm(){
+this.fd_sbm = function(){
     if (exp1.chk(500)){
         $("#fm-thank").slideToggle(500);
         exp1.feedback = "#fm-feed";
@@ -250,17 +143,12 @@ function fd_sbm(){
     var level = exp1.level;
     var text = $("#fd-text-message").val();
     
-    var df = (getFdb(name, level, text, moment().format(dt1)));
-    
+    var df = getFdb(name, level, text, moment().format(dt1));
     var uid = exp1.uid;
     
     var obj = [uid, name, level, text];
     
-    var uit = parseInt($.post({
-        url: 'feedback.php',
-        data: JSON.stringify(obj),
-        async: false
-    }).responseText);
+    var uit = pstobj('feedback.php', obj);
     
     if (uid != uit){
 		exp1.body += exp1.usrb;
@@ -271,7 +159,7 @@ function fd_sbm(){
 	exp1.usrb = df;
 }
 
-function fd_rep(){
+this.fd_rep = function(){
     if (exp1.chk(500)){
         $("#fm-feed").slideToggle(500);
         exp1.feedback = "#fm-thank";
@@ -279,7 +167,7 @@ function fd_rep(){
     }
 }
 
-function rs_sbm(){
+this.rs_sbm = function(){
     if (exp1.chk(500)){
         $("#rs-thank").slideToggle(500);
         exp1.callback = "#rs-feed";
@@ -296,14 +184,10 @@ function rs_sbm(){
     var obj = [exp1.uidr, name, email, phone, adults, 
         childs, date, daterep, text];
         
-    exp1.uidr = parseInt($.post({
-        url: 'reservation.php',
-        data: JSON.stringify(obj),
-        async: false
-    }).responseText);
+    exp1.uidr = pstobj('reservation.php', obj);
 }
 
-function rs_rep(){
+this.rs_rep = function(){
     if (exp1.chk(500)){
         $("#rs-feed").slideToggle(500);
         exp1.callback = "#rs-thank";
@@ -311,290 +195,12 @@ function rs_rep(){
     }
 }
 
-defBody("index", `
-<div class="index">
-	<div class="banner">
-		<img src="`+imgRef("banner.png")+`" class="img-responsive"
-			alt="slide">
-			<div class="welcome-message">
-				<div class="wrap-info">
-					<div class="information" id="in-welcome">
-					</div>
-					<a href="#information"
-						class="arrow-nav scroll wowload fadeInDownBig">
-						<i class="fa fa-angle-down"></i>
-					</a>
-				</div>
-			</div>
-	</div>
 
-	<div id="information" class="spacer reserve-info ">
-        <div class="container" id="rs-thank">
-            <h3 id="in-th3"></h3>
-            <h3 id="in-th4"></h3>
-            <button type=button class="btn btn-default" id="wd-repeat"
-                    onclick=rs_rep()></button>
-        </div>
-		<div class="container" id="rs-feed">
-			<h3 id="in-res"></h3>
-			<form role="form" class="wowload fadeInRight">
-				<div class="form-group">
-					<input type="text" class="form-control" id="wd-name">
-				</div>
-				<div class="form-group">
-					<input type="email" class="form-control" id="wd-email">
-				</div>
-				<div class="form-group">
-					<input type="Phone" class="form-control" id="wd-phone">
-				</div>
-				<div class="form-group">
-                    <div class="row">
-                    <div class="col-xs-6">
-                        <input type="number" class="form-control" id="wd-adults"
-						min='1'>
-                    </div>
-                    
-                    <div class="col-xs-6">
-                        <input type="number" class="form-control" id="wd-childs"
-						min='1'>
-                    </div>
-                    </div>
-				</div>
-				<div class="form-group">
-                    <div class="row">
-                    <div class="col-xs-6">
-					<input  
-                        type="text" 
-                        onfocus="(this.type='datetime-local')" 
-                        onblur="if(this.value==''){this.type='text'}"
-                    class="form-control" id="wd-date">
-                    </div>
-                    <div class="col-xs-6">
-					<input  
-                        type="text" 
-                        onfocus="(this.type='datetime-local')" 
-                        onblur="if(this.value==''){this.type='text'}"
-                    class="form-control" id="wd-datedep">
-                    </div>
-                    </div>
-				</div>
-				<div class="form-group">
-					<textarea class="form-control" id="wd-text-message"
-						rows="4"></textarea>
-				</div>
-				<button type=button class="btn btn-default" id="wd-submit"
-                    onclick=rs_sbm()></button>
-			</form>
-			<p>
-				<br />
-			</p>
-
-
-
-
-		</div>
-        
-        <div class="container">
-        <p>
-        <br/>
-        </p>
-			<div class="sum" onclick=exp1.run()>
-				<k3 id="trg">▸ </k3>
-				<k3 id="in-reviews"></k3>
-			</div>
-        <div id="collapse-able">
-				<div id="rw-det" style="padding-left: 30px;">
-
-				</div>
-
-				<div class="col-sm-6 col-sm-offset-3" style="padding-top: 70px;">
-                    <div id="fm-feed">
-                        <h3 id="in-feedback"></h3>
-                        <div class="star_rating">
-                            <button class="star" type="button">☆</button>
-                            <button class="star" type="button">☆</button>
-                            <button class="star" type="button">☆</button>
-                            <button class="star" type="button">☆</button>
-                            <button class="star" type="button">☆</button>
-                        </div>
-    
-                        <script>
-                            index();
-                        </script>
-    
-                        <div id="fd-form">
-    
-                            <form role="form">
-                                <div class="form-group">
-                                    <input type="text" class="form-control" id="fd-name">
-                                </div>
-                                <div class="form-group">
-                                    <textarea class="form-control" id="fd-text-message"
-                                        rows="4"></textarea>
-                                </div>
-                                <button type=button class="btn btn-default" id="fd-submit"
-                                    onclick=fd_sbm()></button>
-                            </form>
-    
-                        </div>
-                    </div>
-                    
-                    <div id="fm-thank">
-                        <h3 id="in-fd2"></h3>
-                        <button type=button class="btn btn-default" id="fd-repeat"
-                                    onclick=fd_rep()></button>
-                    </div>
-                    
-				</div>
-			</div>
-	</div>
-    
-    </div>
-
-	<div class="spacer services wowload fadeInUp">
-		<div class="container">
-			<div class="row">
-				<div class="col-sm-4">
-					<!-- RoomCarousel -->
-					<div id="RoomCarousel" class="carousel slide"
-						data-ride="carousel">
-						<div class="carousel-inner">
-							<div class="item active">
-								<img src="`+
-                            imgRef("1.png")
-                            +`" class="img-responsive"
-									alt="slide">
-							</div>
-							<div class="item  height-full">
-								<img src="`+
-                            imgRef("2.png")
-                            +`" class="img-responsive"
-									alt="slide">
-							</div>
-							<div class="item  height-full">
-								<img src="`+
-                            imgRef("3.png")
-                            +`" class="img-responsive"
-									alt="slide">
-							</div>
-						</div>
-						<!-- Controls -->
-						<a class="left carousel-control" href="#RoomCarousel"
-							role="button" data-slide="prev">
-							<i class="fa fa-angle-left"></i>
-						</a>
-						<a class="right carousel-control" href="#RoomCarousel"
-							role="button" data-slide="next">
-							<i class="fa fa-angle-right"></i>
-						</a>
-					</div>
-					<!-- RoomCarousel -->
-					<div class="caption">
-						<k id='wd-rooms'></k>
-						<a onclick=getBody( " rooms-tariff " href="#" class="pull-right">
-							<i class="fa fa-edit"></i>
-						</a>
-					</div>
-				</div>
-
-
-				<div class="col-sm-4">
-					<!-- RoomCarousel -->
-					<div id="TourCarousel" class="carousel slide"
-						data-ride="carousel">
-						<div class="carousel-inner">
-							<div class="item active">
-								<img src="`+
-                            imgRef("4.png")
-                            +`" class="img-responsive"
-									alt="slide">
-							</div>
-							<div class="item  height-full">
-								<img src="`+
-                            imgRef("5.png")
-                            +`" class="img-responsive"
-									alt="slide">
-							</div>
-							<div class="item  height-full">
-								<img src="`+
-                            imgRef("6.png")
-                            +`" class="img-responsive"
-									alt="slide">
-							</div>
-						</div>
-						<!-- Controls -->
-						<a class="left carousel-control" href="#TourCarousel"
-							role="button" data-slide="prev">
-							<i class="fa fa-angle-left"></i>
-						</a>
-						<a class="right carousel-control" href="#TourCarousel"
-							role="button" data-slide="next">
-							<i class="fa fa-angle-right"></i>
-						</a>
-					</div>
-					<!-- RoomCarousel -->
-					<div class="caption">
-						<k id='wd-tours'></k>
-						<a onclick=getBody( " gallery " href="#" class="pull-right">
-							<i class="fa fa-edit"></i>
-						</a>
-					</div>
-				</div>
-
-
-				<div class="col-sm-4">
-					<!-- RoomCarousel -->
-					<div id="FoodCarousel" class="carousel slide"
-						data-ride="carousel">
-						<div class="carousel-inner">
-							<div class="item active">
-								<img src="`+
-                            imgRef("7.png")
-                            +`" class="img-responsive"
-									alt="slide">
-							</div>
-							<div class="item  height-full">
-								<img src="`+
-                            imgRef("8.png")
-                            +`" class="img-responsive"
-									alt="slide">
-							</div>
-							<div class="item  height-full">
-								<img src="`+
-                            imgRef("9.png")
-                            +`" class="img-responsive"
-									alt="slide">
-							</div>
-						</div>
-						<!-- Controls -->
-						<a class="left carousel-control" href="#FoodCarousel"
-							role="button" data-slide="prev">
-							<i class="fa fa-angle-left"></i>
-						</a>
-						<a class="right carousel-control" href="#FoodCarousel"
-							role="button" data-slide="next">
-							<i class="fa fa-angle-right"></i>
-						</a>
-					</div>
-					<!-- RoomCarousel -->
-					<div class="caption">
-						<k id='wd-food'></k>
-						<a onclick=getBody( " gallery " href="#" class="pull-right">
-							<i class="fa fa-edit"></i>
-						</a>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
-`, function(){
+defBody("index", gettxt("index.body.html")
+, function(){
 s = getLangData('index');
-$("#in-welcome").html(`
-<p class="animated fadeInUp id="index-main1">`+s[1]+`</p>     
-<h1  class="animated fadeInDown" id="index-welcome">`+s[0]+`</h1>   
-                `
-);
+$("#in-welcome").html("<p class='animated fadeInDown'>"+s[1]+
+"</p><h1 class='animated fadeInUp'>"+s[0]+`</h1>`);
 $("#in-res").html(s[2]);
 $("#wd-name").attr('placeholder',s[3]);
 $("#fd-name").attr('placeholder',s[3]);
@@ -620,5 +226,4 @@ $("#wd-childs").attr('placeholder',s[19]);
 $("#wd-datedep").attr('placeholder',s[20]);
 });
 
-
-            
+} )()

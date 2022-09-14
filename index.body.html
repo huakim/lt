@@ -1,0 +1,258 @@
+<div class="index">
+	<div class="banner">
+		<img src="banner.png" class="img-responsive" alt="slide">
+			<div class="welcome-message">
+				<div class="wrap-info">
+					<div class="information" id="in-welcome">
+					</div>
+                    
+					<a href="#information"
+						class="arrow-nav scroll wowload fadeInDownBig">
+						<i class="fa fa-angle-down"></i>
+					</a>
+				</div>
+			</div>
+	</div>
+
+	<div id="information" class="spacer reserve-info ">
+        <div class="container" id="rs-thank">
+            <h3 id="in-th3"></h3>
+            <h3 id="in-th4"></h3>
+            <button type=button class="btn btn-default" id="wd-repeat"
+                    onclick=rs_rep()></button>
+        </div>
+		<div class="container" id="rs-feed">
+			<h3 id="in-res"></h3>
+			<form role="form" class="wowload fadeInRight">
+				<div class="form-group">
+					<input type="text" class="form-control" id="wd-name">
+				</div>
+				<div class="form-group">
+					<input type="email" class="form-control" id="wd-email">
+				</div>
+				<div class="form-group">
+					<input type="Phone" class="form-control" id="wd-phone">
+				</div>
+				<div class="form-group">
+                    <div class="row">
+                    <div class="col-xs-6">
+                        <input type="number" class="form-control" id="wd-adults"
+						min='1'>
+                    </div>
+                    
+                    <div class="col-xs-6">
+                        <input type="number" class="form-control" id="wd-childs"
+						min='1'>
+                    </div>
+                    </div>
+				</div>
+				<div class="form-group">
+                    <div class="row">
+                    <div class="col-xs-6">
+					<input  
+                        type="text" 
+                        onfocus="(this.type='datetime-local')" 
+                        onblur="if(this.value==''){this.type='text'}"
+                    class="form-control" id="wd-date">
+                    </div>
+                    <div class="col-xs-6">
+					<input  
+                        type="text" 
+                        onfocus="(this.type='datetime-local')" 
+                        onblur="if(this.value==''){this.type='text'}"
+                    class="form-control" id="wd-datedep">
+                    </div>
+                    </div>
+				</div>
+				<div class="form-group">
+					<textarea class="form-control" id="wd-text-message"
+						rows="4"></textarea>
+				</div>
+				<button type=button class="btn btn-default" id="wd-submit"
+                    onclick=rs_sbm()></button>
+			</form>
+			<p>
+				<br>
+			</p>
+
+
+
+
+		</div>
+        
+        <div class="container">
+        <p>
+        <br>
+        </p>
+			<div class="sum" onclick=exp1.run()>
+				<k3 id="trg">▸ </k3>
+				<k3 id="in-reviews"></k3>
+			</div>
+        <div id="collapse-able">
+				<div id="rw-det" style="padding-left: 30px;">
+
+				</div>
+
+				<div class="col-sm-6 col-sm-offset-3" style="padding-top: 70px;">
+                    <div id="fm-feed">
+                        <h3 id="in-feedback"></h3>
+                        <div class="star_rating">
+                            <button class="star" type="button">☆</button>
+                            <button class="star" type="button">☆</button>
+                            <button class="star" type="button">☆</button>
+                            <button class="star" type="button">☆</button>
+                            <button class="star" type="button">☆</button>
+                        </div>
+    
+                        <script>
+                            index();
+                        </script>
+    
+                        <div id="fd-form">
+    
+                            <form role="form">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" id="fd-name">
+                                </div>
+                                <div class="form-group">
+                                    <textarea class="form-control" id="fd-text-message"
+                                        rows="4"></textarea>
+                                </div>
+                                <button type=button class="btn btn-default" id="fd-submit"
+                                    onclick=fd_sbm()></button>
+                            </form>
+    
+                        </div>
+                    </div>
+                    
+                    <div id="fm-thank">
+                        <h3 id="in-fd2"></h3>
+                        <button type=button class="btn btn-default" id="fd-repeat"
+                                    onclick=fd_rep()></button>
+                    </div>
+                    
+				</div>
+			</div>
+	</div>
+    
+    </div>
+
+	<div class="spacer services wowload fadeInUp">
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-4">
+					<!-- RoomCarousel -->
+					<div id="RoomCarousel" class="carousel slide"
+						data-ride="carousel">
+						<div class="carousel-inner">
+							<div class="item active">
+								<img src="1.png" class="img-responsive"
+									alt="slide">
+							</div>
+							<div class="item  height-full">
+								<img src="2.png" class="img-responsive"
+									alt="slide">
+							</div>
+							<div class="item  height-full">
+								<img src="3.png" class="img-responsive"
+									alt="slide">
+							</div>
+						</div>
+						<!-- Controls -->
+						<a class="left carousel-control" href="#RoomCarousel"
+							role="button" data-slide="prev">
+							<i class="fa fa-angle-left"></i>
+						</a>
+						<a class="right carousel-control" href="#RoomCarousel"
+							role="button" data-slide="next">
+							<i class="fa fa-angle-right"></i>
+						</a>
+					</div>
+					<!-- RoomCarousel -->
+					<div class="caption">
+						<k id='wd-rooms'></k>
+						<a onclick=getBody("gallery") href="#" class="pull-right">
+							<i class="fa fa-edit"></i>
+						</a>
+					</div>
+				</div>
+
+
+				<div class="col-sm-4">
+					<!-- RoomCarousel -->
+					<div id="TourCarousel" class="carousel slide"
+						data-ride="carousel">
+						<div class="carousel-inner">
+							<div class="item active">
+								<img src="4.png" class="img-responsive"
+									alt="slide">
+							</div>
+							<div class="item  height-full">
+								<img src="5.png" class="img-responsive"
+									alt="slide">
+							</div>
+							<div class="item  height-full">
+								<img src="6.png" class="img-responsive"
+									alt="slide">
+							</div>
+						</div>
+						<!-- Controls -->
+						<a class="left carousel-control" href="#TourCarousel"
+							role="button" data-slide="prev">
+							<i class="fa fa-angle-left"></i>
+						</a>
+						<a class="right carousel-control" href="#TourCarousel"
+							role="button" data-slide="next">
+							<i class="fa fa-angle-right"></i>
+						</a>
+					</div>
+					<!-- RoomCarousel -->
+					<div class="caption">
+						<k id='wd-tours'></k>
+						<a onclick=getBody("gallery") href="#" class="pull-right">
+							<i class="fa fa-edit"></i>
+						</a>
+					</div>
+				</div>
+
+
+				<div class="col-sm-4">
+					<!-- RoomCarousel -->
+					<div id="FoodCarousel" class="carousel slide"
+						data-ride="carousel">
+						<div class="carousel-inner">
+							<div class="item active">
+								<img src="7.png" class="img-responsive"
+									alt="slide">
+							</div>
+							<div class="item  height-full">
+								<img src="8.png" class="img-responsive"
+									alt="slide">
+							</div>
+							<div class="item  height-full">
+								<img src="9.png" class="img-responsive"
+									alt="slide">
+							</div>
+						</div>
+						<!-- Controls -->
+						<a class="left carousel-control" href="#FoodCarousel"
+							role="button" data-slide="prev">
+							<i class="fa fa-angle-left"></i>
+						</a>
+						<a class="right carousel-control" href="#FoodCarousel"
+							role="button" data-slide="next">
+							<i class="fa fa-angle-right"></i>
+						</a>
+					</div>
+					<!-- RoomCarousel -->
+					<div class="caption">
+						<k id='wd-food'></k>
+						<a onclick=getBody("gallery") href="#" class="pull-right">
+							<i class="fa fa-edit"></i>
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
