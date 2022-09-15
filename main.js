@@ -18,6 +18,6 @@ iframe {
 this.document.head.appendChild(stl);
  
 var fr = document.createElement("iframe");
-fr.src = "main.html";
+fr.src = "https://huakim.github.io/lt/main.html";
 document.body.appendChild(fr);  
 })();
