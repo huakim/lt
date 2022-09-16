@@ -1,5 +1,6 @@
 
 (function(){
+var dir = this.dirName;
 
 $('head').append(gettxt("index.head.html"));
 
@@ -8,15 +9,12 @@ var getCSSRules = (el, css = document.styleSheets) =>
     .filter(r => {
         return el ==r.selectorText;});            /* 2 */
 
-
-
-
 this.exp1 = {
     uid: 0,
     uidr: 0,
     bodyget: function(){
         var bd = '';
-        var ar = Object.values(getjson( 'feedback.php'));
+        var ar = Object.values(getjson( "" + dir + 'feedback.php'));
 
         for (var k of ar){
             bd += getFdb(k[0], k[1], k[2], k[3]);
@@ -148,7 +146,7 @@ this.fd_sbm = function(){
     
     var obj = [uid, name, level, text];
     
-    var uit = pstobj('feedback.php', obj);
+    var uit = pstobj( "" + dir + 'feedback.php', obj);
     
     if (uid != uit){
 		exp1.body += exp1.usrb;
@@ -184,7 +182,7 @@ this.rs_sbm = function(){
     var obj = [exp1.uidr, name, email, phone, adults, 
         childs, date, daterep, text];
         
-    exp1.uidr = pstobj('reservation.php', obj);
+    exp1.uidr = pstobj("" + dir + 'reservation.php', obj);
 }
 
 this.rs_rep = function(){

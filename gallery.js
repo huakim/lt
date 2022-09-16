@@ -24,7 +24,7 @@ this.shuffle = function(array) {
 this.gl1 = function (){
     list = [];
     var i = 0;
-    while (i < 13){
+    while (i < GALLERY_SIZE){
         i++;
         list.push(i);
     }

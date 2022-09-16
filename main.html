@@ -420,20 +420,56 @@ input[type="date"]:valid::before { display: none }
 (function(){
 
 this.DEFAULT_LANGUAGE = "GB"; 
-this.START_PAGE = "index";   
 this.GALLERY_SIZE = 13;
 
 const pr = this.window.parent;
-var i1 = pr.location.href;
+
+/*var i1 = pr.location.href;
 t = i1.lastIndexOf('/');
 t ++;
 i1 = i1.substring(0, t);
 pr.dirName = i1;
 pr.history.pushState({name: pr.START_PAGE}, 
 '', i1 + pr.START_PAGE + '.html');
+*/
 
-this.reload_title = function(t){pr.document.title = t;};
-this.reload_href = function(t){pr.history.pushState({name: t}, '', pr.dirName + t + '.html');};
+
+this.funcmap = new Object();
+this.dirName = '';
+
+var tt = this;
+
+this.postMessageObj = function(e){
+    pr.postMessage(JSON.stringify(e));
+}
+
+this.reload_title = function(t){tt.postMessageObj(["title", t]);};
+this.reload_href = function(t){tt.postMessageObj(["href", t]);};
+
+funcmap.getBody = function(e){
+    tt.getBody(e[1]);
+}
+
+funcmap.getNew = function(e){
+    tt.getNew(e[1]);
+}
+
+funcmap.setDir = function(e){
+    
+    var e1 = "http://"+e[1]+"/";
+    
+    tt.window.dirName = e1;
+    
+    tt.getMainLocale();
+    tt.getNew(e[2]);
+}
+
+window.addEventListener('message', function(e) {
+    e = e.data;
+
+	e = JSON.parse(e);
+    funcmap[e[0]](e);
+}, false);
 
 jQuery(document).ready(function($) {
  
@@ -501,7 +537,10 @@ this.getjs = function(i){
 }
 
 this.getjson = function(i){
-    return JSON.parse(gettxt(i));
+  //  return JSON.parse(gettxt(i));
+    d = (gettxt(i));
+    
+    return JSON.parse(d);
 }
 
 this.defBody = function(i, s, f){
@@ -600,7 +639,6 @@ for (var value of langSet){
 t += '</select>';
 $("#nav-select").html(t);
 
-this.getMainLocale();
 
 
 /*
@@ -625,13 +663,10 @@ else {
 var i1 = START_PAGE;
 */
 
-
 this.getNew = function(t){
     reload_href(t);
     getBody(t);
 }
-
-getBody(pr.START_PAGE);
 
 
 $("#lang-select").change(function(){
@@ -640,36 +675,6 @@ $("#lang-select").change(function(){
 });
 
 this.dt1 = "YYYY-MM-DD HH:mm";
-/*
-(function(){
-  //  let t = $;
-    let tt = this;
-    this.main = function(i1){
-        
-    //    alert(Object.keys(this));
-        
-        var i = this.location.href;
-        var t = i.lastIndexOf('/');
-        t ++;
-        tt.dirName = this.dirName = i.substring(0, t);
-        
-        this.document.title = tt.document.title;
-        
-        this.addEventListener('popstate', function(e){
-            tt.getBody(e.state.name);
-        });
-        
-        tt.reload_title = tt.reload_title.bind(this);
-        
-        tt.reload_href = tt.reload_href.bind(this);
-        
-        tt.getNew(i1);
-        
-        alert(tt.gettxt.bind(this)("main.css"));
-   //     this.location.href = this.dirName + w.currentPage;
-    }
-})();
-*/
 
 
 })();
