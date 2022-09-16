@@ -613,17 +613,8 @@ this.getMainLocale = function(){
     $("#nav-links").html(s[5]);
 }
 
-try{
-    this.langName = 
-        gettxt("http://ip-api.com/line/?fields=countryCode").trim();
-} catch (e){
-    this.langName = 
-        gettxt("https://ipinfo.io/country").trim();
-}
-
-if (!langSet.has(this.langName)){
     this.langName = DEFAULT_LANGUAGE;
-}
+
 
 //$("#nav-select").html(
 var t = '<select id="lang-select" >';
