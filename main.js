@@ -18,7 +18,7 @@ iframe {
 this.document.head.appendChild(stl);
  
 var fr = document.createElement("iframe");
-fr.src = "https://huakim.github.io/lt/main.html";
+fr.src = "http://localhost:8111/main.html";
 document.body.appendChild(fr);  
 
 funcmap = new Object();
@@ -42,11 +42,11 @@ tt = this;
 
 fr.addEventListener("load", function() {
     let wn = fr.contentWindow;
-    wn.postMessage(JSON.stringify(['setDir', location.host, tt.START_PAGE]));
-    /*
+    wn.postMessage(JSON.stringify(['setDir', location.host, tt.START_PAGE]),  "http://localhost:8111/");
+    
     tt.addEventListener('popstate', function(e){
-        wn.postMessage(JSON.stringify(['getBody', e.state.name]));
-    } );*/
+        wn.postMessage(JSON.stringify(['getBody', e.state.name]), "http://localhost:8111/");
+    } );
 });
 
 })();
