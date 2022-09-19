@@ -1,6 +1,6 @@
 
 (function(){
-var dir = "http://kubachiyut.ru/"
+var dir = this.dirName
 
 $('head').append(gettxt("index.head.html"));
 
