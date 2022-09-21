@@ -28,7 +28,6 @@ this.funcmap.getFdb = function(e){
 }
 
 this.funcmap.postFdb = function(e){
-    alert("funny load");
     var uid = exp1.uid;
     var uit = e[1];
     
@@ -42,7 +41,6 @@ this.funcmap.postFdb = function(e){
 	
 	exp1.uid = uit;
 	exp1.usrb = df;
-    alert('no error');
 }
 
 this.funcmap.postRes = function(e){
