@@ -35,6 +35,9 @@ this.funcmap.postFdb = function(e){
     if (uid != uit){
 		exp1.body += exp1.usrb;
 	}
+    
+    var df = getFdb(e[2], e[3], e[4], moment().format(dt1));
+    
 	tt.setFdb(exp1.body + df);
 	
 	exp1.uid = uit;
@@ -173,7 +176,6 @@ this.fd_sbm = function(){
     var level = exp1.level;
     var text = $("#fd-text-message").val();
     
-    var df = getFdb(name, level, text, moment().format(dt1));
     var uid = exp1.uid;
     
     var obj = [uid, name, level, text];

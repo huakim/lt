@@ -70,8 +70,9 @@ fr.addEventListener("load", function() {
     }
     
     funcmap.postFdb = function(a){
-        t = tt.postjson("/feedback.php", a[1]);
-        tt.postObj(wn, ["postFdb", t], org);
+        var fdb = a[1]
+        t = tt.postjson("/feedback.php", fdb);
+        tt.postObj(wn, ["postFdb", t, fdb[1], fdb[2], fdb[3]], org);
     }
     
     funcmap.postRes = function(a){
