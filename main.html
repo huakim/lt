@@ -424,43 +424,32 @@ this.GALLERY_SIZE = 13;
 
 const pr = this.window.parent;
 
-/*var i1 = pr.location.href;
-t = i1.lastIndexOf('/');
-t ++;
-i1 = i1.substring(0, t);
-pr.dirName = i1;
-pr.history.pushState({name: pr.START_PAGE}, 
-'', i1 + pr.START_PAGE + '.html');
-*/
-
+this.dirName = '';
 
 this.funcmap = new Object();
-this.dirName = '';
 
 var tt = this;
 
-this.postMessageObj = function(e){
+this.postObj = function(e){
     pr.postMessage(JSON.stringify(e), tt.dirName);
 }
 
-this.reload_title = function(t){tt.postMessageObj(["title", t]);};
-this.reload_href = function(t){tt.postMessageObj(["href", t]);};
+this.reload_title = function(t){tt.postObj(["title", t]);};
+this.reload_href = function(t){tt.postObj(["href", t]);};
 
-funcmap.getBody = function(e){
+this.funcmap.getBody = function(e){
     tt.getBody(e[1]);
 }
 
-funcmap.getNew = function(e){
+this.funcmap.getNew = function(e){
     tt.getNew(e[1]);
 }
 
-funcmap.setDir = function(e){
-    
-    var e1 = "https://"+e[1]+"/";
-    
-    tt.window.dirName = e1;
-    
+this.funcmap.setDir = function(e){
+    alert(e[1]);
+    tt.dirName = e[1];
     tt.getMainLocale();
+    alert(e[1]);
     tt.getNew(e[2]);
 }
 

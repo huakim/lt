@@ -9,17 +9,47 @@ var getCSSRules = (el, css = document.styleSheets) =>
     .filter(r => {
         return el ==r.selectorText;});            /* 2 */
 
+var tt = this;
+
+this.setFdb = function(bd){
+    if ($("#collapse-able").css('display') != 'none'){
+        $("#rw-det").html(bd);
+    }
+}
+
+this.funcmap.getFdb = function(e){
+    var ar = e[1];
+    var bd = '';
+    for (var k of ar){
+        bd += tt.getFdb(k[0], k[1], k[2], k[3]);
+    }
+    exp1.body = bd;
+    tt.setFdb(bd);
+}
+
+this.funcmap.postFdb = function(e){
+    var uid = exp1.uid;
+    var uit = e[1];
+    
+    if (uid != uit){
+		exp1.body += exp1.usrb;
+	}
+	tt.setFdb(exp1.body + df);
+	
+	exp1.uid = uit;
+	exp1.usrb = df;
+}
+
+this.funcmap.postRes = function(e){
+    
+}
+
 this.exp1 = {
     uid: 0,
     uidr: 0,
     bodyget: function(){
         var bd = '';
-        var ar = Object.values(getjson( "" + dir + 'feedback.php'));
-
-        for (var k of ar){
-            bd += getFdb(k[0], k[1], k[2], k[3]);
-        }
-        this.body = bd;
+        tt.postObj(["getFdb"]);
     },
     body: "",
     usrb: "",
@@ -145,7 +175,8 @@ this.fd_sbm = function(){
     var uid = exp1.uid;
     
     var obj = [uid, name, level, text];
-    
+    this.postObj(["postFdb", obj]);
+    /*
     var uit = pstobj( "" + dir + 'feedback.php', obj);
     
     if (uid != uit){
@@ -154,7 +185,7 @@ this.fd_sbm = function(){
 	$("#rw-det").html(exp1.body + df);
 	
 	exp1.uid = uit;
-	exp1.usrb = df;
+	exp1.usrb = df;*/
 }
 
 this.fd_rep = function(){
@@ -182,7 +213,7 @@ this.rs_sbm = function(){
     var obj = [exp1.uidr, name, email, phone, adults, 
         childs, date, daterep, text];
         
-    exp1.uidr = pstobj("" + dir + 'reservation.php', obj);
+    this.postObj(["postRes", obj]);
 }
 
 this.rs_rep = function(){

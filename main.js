@@ -32,6 +32,21 @@ funcmap.href = function(a){
     history.pushState({name: t}, '', t + '.html');
 }
 
+
+this.getjson = function(i){
+    var xhr = new XMLHttpRequest();
+    xhr.open("GET", i, false);
+    xhr.send();
+    return JSON.parse(xhr.response);
+}
+
+this.postjson = function(i, obj){
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", i, false);
+    xhr.send(JSON.stringify(obj));
+    return JSON.parse(xhr.response);
+}
+
 window.addEventListener('message', function(e) {
 	e = JSON.parse(e.data);
     t = e[0];
@@ -40,12 +55,36 @@ window.addEventListener('message', function(e) {
 
 tt = this;
 
+this.postObj = function(wn, obj, org){
+    wn.postMessage(JSON.stringify(obj), org);
+}
+
 fr.addEventListener("load", function() {
     let wn = fr.contentWindow;
-    wn.postMessage(JSON.stringify(['setDir', location.host, tt.START_PAGE]),  "https://huakim.github.io/lt/");
+    
+    const org = "https://huakim.github.io/lt/";
+    
+    funcmap.getFdb = function(a){
+        t = tt.getjson("/feedback.php");
+        tt.postObj(wn, ["getFdb", t], org);
+    }
+    
+    funcmap.postFdb = function(a){
+        t = tt.postjson("/feedback.php", a[1]);
+        tt.postObj(wn, ["postFdb", t], org);
+    }
+    
+    funcmap.postRes = function(a){
+        t = tt.postjson("/reservation.php", a[1]);
+        tt.postObj(wn, ["postRes", t], org);
+    }
+    
+    
+    
+    tt.postObj(wn, ['setDir', location.protocol+"//"+location.host+"/", tt.START_PAGE], org);
     
     tt.addEventListener('popstate', function(e){
-        wn.postMessage(JSON.stringify(['getBody', e.state.name]), "https://huakim.github.io/lt/");
+        tt.postObj(wn, ['getBody', e.state.name], org);
     } );
 });
 
