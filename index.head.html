@@ -1,0 +1,94 @@
+<link rel="stylesheet" href="font-awesome/css/all.min.css" />
+    <style>
+    
+.details,
+.show,
+.hide:target {
+  display: none;
+}
+.hide:target + .show,
+.hide:target ~ .details {
+  display: block;
+}
+    
+.star-widget-container{
+  position: relative;
+  width: 220px;
+  background: inherit;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+
+.star-widget label{
+  font-size: 16px;
+  color: #444;
+  float: right;
+  padding: 10px;
+}
+
+
+.check label{
+  color: #fd4;
+}
+
+
+.all_check label{
+  color: #fe7;
+  text-shadow: 0 0 20px #952;
+}
+
+        .star_rating{
+            user-select: none;
+            color: white;
+            background-color: white;
+            padding: 1.4rem 2.5rem;
+            margin: 2rem;
+            border-radius: .4rem;
+			animation: slide-up 1s ease;
+        }
+
+        @keyframes slide-up{
+            0%{
+                opacity: 0;
+                transform: scale(.5);
+            }
+
+            100%{
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+        
+
+        .rating_heading{
+            color: white;
+            animation: scale-up 1s ease;
+        }
+
+        @keyframes scale-up{
+            0%{
+                opacity: 0;
+                transform: translateY(50px);
+            }
+
+            100%{
+                opacity: 1;
+                transform: translateY(0px);
+            }
+        }
+
+        .star{
+            font-size: 3rem;
+            color: #ff9800;
+            background-color: unset;
+            border: none;
+            outline: none;
+        }
+
+        .star:hover{
+            cursor: pointer;
+        } 
+    </style>

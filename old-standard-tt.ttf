@@ -1,0 +1,6 @@
+--2023-01-17 21:54:32--  https://fonts.cdnfonts.com/css/old-standard-tt-4
+Resolving fonts.cdnfonts.com (fonts.cdnfonts.com)... 188.114.98.233, 188.114.99.233, 2a06:98c1:3123:e000::, ...
+Connecting to fonts.cdnfonts.com (fonts.cdnfonts.com)|188.114.98.233|:443... connected.
+HTTP request sent, awaiting response... 403 Forbidden
+2023-01-17 21:54:33 ERROR 403: Forbidden.
+
