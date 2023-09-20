@@ -4,7 +4,7 @@
 $('head').append(`<style>@import url("map/leaflet.css");
 .img1{vertical-align:middle;width:40px;height:40px;}</style>`);
 this.scl = function(image, link, text){
-  return `<a class=body3 href="`+link+`"><img src='`
+  return `<a class=body3 href="javascript:;" onclick="openLink('`+link+`');"><img src='`
   +image+`' class=img1 />`+text+`<br/></a>`;
 }
 

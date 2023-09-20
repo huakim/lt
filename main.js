@@ -980,6 +980,8 @@ fr.addEventListener("load", function() {
     
     const org = root.LOAD_PAGE;
     
+    var win = root.window;
+    
     var raw = aesjs.utils.randomBytes(
         aesjs.utils.randomInt(128, 4096), []);
 
@@ -1022,6 +1024,10 @@ fr.addEventListener("load", function() {
         
     }
     
+    funcmap.openLink = function(a){
+        win.open(a[1]);
+    }
+    
     funcmap.postFdb = function(a){
         var fdb = a[1]
         // t is identificator
@@ -1029,21 +1035,23 @@ fr.addEventListener("load", function() {
         // fdb[1] is name
         // fdb[2] is rate
         // fdb[3] is text
+        alert('feedback');
         var t = root.postjson("feedback", fdb, ft);
         postObj(wn, ["postFdb", t, fdb[1], fdb[2], fdb[3]], org);
     }
     
     funcmap.postRes = function(a){
-        //id
-        //name
-        //email
-        //phone
-        //adults, 
-        //childs
-        //datearrival
-        //datereparture
-        //text
+        // id
+        // name
+        // email
+        // phone
+        // adults 
+        // childs
+        // datearrival
+        // datereparture
+        // text
         // t is identificator
+        alert('reservation');
         var t = root.postjson("reservation", a[1], ft);
         postObj(wn, ["postRes", t], org);
     }

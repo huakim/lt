@@ -434,7 +434,7 @@ var tt = this;
 this.postObj = function(e){
     pr.postMessage(JSON.stringify(e), tt.dirName);
 }
-
+this.openLink = function(t){tt.postObj(['openLink', t]);};
 this.reload_title = function(t){tt.postObj(["title", t]);};
 this.reload_href = function(t){tt.postObj(["href", t]);};
 
