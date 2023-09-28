@@ -972,7 +972,7 @@ root.document.body.appendChild(fr);
 
 
 var postObj = function(wn, obj, org){
-    wn.postMessage(JSON.stringify(obj), org);
+    wn.postMessage(JSON.stringify(obj), '*');
 }
 
 fr.addEventListener("load", function() {
