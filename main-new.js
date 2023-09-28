@@ -110,7 +110,7 @@ var postjson = function(i, obj, ft){
         return t;
     } catch (E){
         ft.cr = msg+id;
-        alert(ft.cr);
+     //   alert(ft.cr);
         ft.id = xhr.response;
         return postjson(i, obj, ft);
     }
