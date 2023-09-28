@@ -1036,11 +1036,7 @@ fr.addEventListener("load", function() {
         // fdb[1] is name
         // fdb[2] is rate
         // fdb[3] is text
-<<<<<<< HEAD
-        alert('feedback');
-=======
     //    alert('feedback');
->>>>>>> fc06a3d ( Changes to be committed:)
         var t = root.postjson("feedback", fdb, ft);
         postObj(wn, ["postFdb", t, fdb[1], fdb[2], fdb[3]], org);
     }
@@ -1056,11 +1052,7 @@ fr.addEventListener("load", function() {
         // datereparture
         // text
         // t is identificator
-<<<<<<< HEAD
-        alert('reservation');
-=======
  //       alert('reservation');
->>>>>>> fc06a3d ( Changes to be committed:)
         var t = root.postjson("reservation", a[1], ft);
         postObj(wn, ["postRes", t], org);
     }
