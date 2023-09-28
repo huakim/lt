@@ -878,7 +878,7 @@ var encryptObjToHex = function(obj, cr){
     ret = randomBytes((16-(len%16)), ret);
     obj = cr.encrypt(ret);
     obj = hexFromBytes(obj);
-    alert(obj);
+   // alert(obj);
     return obj;  
 }
 aes.encryptObjToHex = encryptObjToHex;
