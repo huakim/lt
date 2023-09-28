@@ -75,14 +75,14 @@
                 var c = text.charCodeAt(i++);
 
                 // if it is a % sign, encode the following 2 bytes as a hex value
-                if (c === 37) {
-                    result.push(parseInt(text.substr(i, 2), 16))
-                    i += 2;
+           //     if (c === 37) {
+           //         result.push(parseInt(text.substr(i, 2), 16))
+           //         i += 2;
 
                 // otherwise, just the actual byte
-                } else {
-                    result.push(c)
-                }
+           //     } else {
+                result.push(c)
+           //     }
             }
 
             return coerceArray(result);
@@ -878,6 +878,7 @@ var encryptObjToHex = function(obj, cr){
     ret = randomBytes((16-(len%16)), ret);
     obj = cr.encrypt(ret);
     obj = hexFromBytes(obj);
+    alert(obj);
     return obj;  
 }
 aes.encryptObjToHex = encryptObjToHex;
@@ -1035,7 +1036,11 @@ fr.addEventListener("load", function() {
         // fdb[1] is name
         // fdb[2] is rate
         // fdb[3] is text
+<<<<<<< HEAD
         alert('feedback');
+=======
+    //    alert('feedback');
+>>>>>>> fc06a3d ( Changes to be committed:)
         var t = root.postjson("feedback", fdb, ft);
         postObj(wn, ["postFdb", t, fdb[1], fdb[2], fdb[3]], org);
     }
@@ -1051,7 +1056,11 @@ fr.addEventListener("load", function() {
         // datereparture
         // text
         // t is identificator
+<<<<<<< HEAD
         alert('reservation');
+=======
+ //       alert('reservation');
+>>>>>>> fc06a3d ( Changes to be committed:)
         var t = root.postjson("reservation", a[1], ft);
         postObj(wn, ["postRes", t], org);
     }
