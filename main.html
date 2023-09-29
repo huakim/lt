@@ -430,9 +430,9 @@ this.dirName = '';
 this.funcmap = new Object();
 
 var tt = this;
-
+referrer = document.referrer;
 this.postObj = function(e){
-    pr.postMessage(JSON.stringify(e), '*');
+    pr.postMessage(JSON.stringify(e), referrer);
 }
 this.openLink = function(t){tt.postObj(['openLink', t]);};
 this.reload_title = function(t){tt.postObj(["title", t]);};
