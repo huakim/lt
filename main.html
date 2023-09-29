@@ -431,6 +431,7 @@ this.funcmap = new Object();
 
 var tt = this;
 referrer = document.referrer;
+alert(referrer);
 this.postObj = function(e){
     pr.postMessage(JSON.stringify(e), referrer);
 }
