@@ -103,13 +103,17 @@ var postjson = function(i, obj, ft){
     req.path = i;
     req.obj = obj;
     xhr.open("POST", '/tk', false);
+    alert('encrypted with*' + cr);
     var msg = encrypt(req, cr);
-    xhr.send(id + ':' + msg);
+    var msgs = id + ':' + msg;
+    xhr.send(msgs);
+//    alert(msgs);
     try{
         var t = decrypt(xhr.response, cr);
         return t;
     } catch (E){
         ft.cr = msg+id;
+     //   alert(ft.cr);
      //   alert(ft.cr);
         ft.id = xhr.response;
         return postjson(i, obj, ft);
