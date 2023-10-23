@@ -103,7 +103,7 @@ var postjson = function(i, obj, ft){
     req.path = i;
     req.obj = obj;
     xhr.open("POST", '/tk', false);
-    alert('encrypted with*' + cr);
+  //  alert('encrypted with*' + cr);
     var msg = encrypt(req, cr);
     var msgs = id + ':' + msg;
     xhr.send(msgs);
